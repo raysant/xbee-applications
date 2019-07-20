@@ -1,0 +1,14 @@
+ProjectName=trash_sensor
+VersionRevision=0
+UseFloating=Yes
+WriteHeader=Yes
+ModuleName=XBee ZB (S2CTH)
+ProjectDescription=Allow XBee module to collect and send measurements from an HX711 amplifier and load cell. Can be used to keep track of how many pounds of trash a household has produced.
+ProjectType=com.digi.xbee.project.xbee
+LibraryVersion=1.6.0
+ExtensionsVersion=1.6.0
+VersionMinor=0
+AppVersionString=trash_sensor
+VersionMajor=1
+MemorySize=32KB
+ProjectID=trash_sensor

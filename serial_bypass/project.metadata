@@ -1,0 +1,14 @@
+ProjectName=serial_bypass
+VersionRevision=0
+UseFloating=No
+WriteHeader=Yes
+ModuleName=XBee ZB (S2CTH)
+ProjectDescription=Implement a bypass of the Freescale CPU inside the programmable XBee module.
+ProjectType=com.digi.xbee.project.xbee
+LibraryVersion=1.6.0
+ExtensionsVersion=1.6.0
+VersionMinor=0
+AppVersionString=Serial Bypass
+VersionMajor=1
+MemorySize=32KB
+ProjectID=serial_bypass

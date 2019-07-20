@@ -1,0 +1,14 @@
+ProjectName=water_sensor
+VersionRevision=0
+UseFloating=No
+WriteHeader=Yes
+ModuleName=XBee ZB (S2CTH)
+ProjectDescription=Allow XBee module to count how many times a latching hall effect sensor has been triggered. Can be used to detect when liquid has passed through certain types of flow meters.
+ProjectType=com.digi.xbee.project.xbee
+LibraryVersion=1.6.0
+ExtensionsVersion=1.6.0
+VersionMinor=0
+AppVersionString=water_sensor
+VersionMajor=1
+MemorySize=32KB
+ProjectID=water_sensor
