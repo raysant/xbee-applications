@@ -5,10 +5,12 @@ import numpy as np
 
 filename = "sensors.csv"
 
-# Scaling factors found experimentally.
-e_scaling = 3.9096E-7
-w_scaling = 0.32041
-t_scaling = 1
+# Scaling factors found experimentally. To change the units
+# (.e.g. from pounds to kilograms), multiply these numbers by
+# the conversion ratio.
+e_scaling = 3.9096E-7 # W*h
+w_scaling = 0.32041 # mL
+t_scaling = 1 # lb
 
 label_frame = {'Sensor':['Electric', 'Water', 'Trash'], 'Value':[0, 0, 0],
                'Units':['W*h', 'mL', 'lb']}
