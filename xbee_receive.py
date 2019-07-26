@@ -1,41 +1,43 @@
-import serial, time, os.path
-from xbee import XBee, ZigBee
+import os.path
+import time
+import serial
 import pandas as pd
 import numpy as np
+from xbee import XBee, ZigBee
 
-filename = "sensors.csv"
+FILENAME = "sensors.csv"
 
 # Scaling factors found experimentally. To change the units
 # (.e.g. from pounds to kilograms), multiply these numbers by
 # the conversion ratio.
-e_scaling = 3.9096E-7 # W*h
-w_scaling = 0.32041 # mL
-t_scaling = 1 # lb
+E_SCALING_FACTOR = 3.9096E-7 # W*h
+W_SCALING_FACTOR = 0.32041 # mL
+T_SCALING_FACTOR = 1 # lb
 
-label_frame = {'Sensor':['Electric', 'Water', 'Trash'], 'Value':[0, 0, 0],
+LABEL_FRAME = {'Sensor':['Electric', 'Water', 'Trash'], 'Value':[0, 0, 0],
                'Units':['W*h', 'mL', 'lb']}
-if (not os.path.exists(filename)):
+if not os.path.exists(FILENAME):
     # Create a CSV file with the proper row and column labels.
-    pd.DataFrame(data=label_frame).to_csv(filename, index=False)
+    pd.DataFrame(data=LABEL_FRAME).to_csv(FILENAME, index=False)
 
 def print_data(data):
     # Process incoming data and store into proper location in CSV file.
     msg = data['rf_data'].decode("utf-8")
-    data_frame = pd.read_csv(filename, index_col=0)
-    
-    if (msg[0] == 'E'):
-        energy = int(msg[2:-1], base=10) * e_scaling
+    data_frame = pd.read_csv(FILENAME, index_col=0)
+
+    if msg[0] == 'E':
+        energy = int(msg[2:-1], base=10) * E_SCALING_FACTOR
         data_frame.loc['Electric', 'Value'] += energy
-        
-    elif (msg[0] == 'W'):
-        volume = int(msg[2:-1], base=10) * w_scaling
+
+    elif msg[0] == 'W':
+        volume = int(msg[2:-1], base=10) * W_SCALING_FACTOR
         data_frame.loc['Water', 'Value'] += volume
 
-    elif (msg[0] == 'T'):
-        weight = float(msg[2:-1]) * t_scaling
+    elif msg[0] == 'T':
+        weight = float(msg[2:-1]) * T_SCALING_FACTOR
         data_frame.loc['Trash', 'Value'] += weight
 
-    data_frame.to_csv(filename)
+    data_frame.to_csv(FILENAME)
     print(data_frame, '\n')
 
 # Allow Raspberry Pi to communicate with XBee module and
@@ -50,6 +52,6 @@ while True:
         break
 
 # Write zeros to CSV file and close connections properly.
-pd.DataFrame(data=label_frame).to_csv(filename, index=False)
+pd.DataFrame(data=LABEL_FRAME).to_csv(FILENAME, index=False)
 xbee.halt()
 serial_port.close()
